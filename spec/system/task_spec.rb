@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Task', type: :system do
-  let(:project) { FactoryBot.create(:project) }
+  let(:project) { create(:project) }
   describe 'Task一覧' do
-    let!(:task) { FactoryBot.create(:task, project_id: project.id) }
+    let!(:task) { create(:task, project_id: project.id) }
     context '正常系' do
       it '一覧ページにアクセスした場合、Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
@@ -48,7 +48,7 @@ RSpec.describe 'Task', type: :system do
   end
 
   describe 'Task詳細' do
-    let(:task) { FactoryBot.create(:task, project_id: project.id) }
+    let(:task) { create(:task, project_id: project.id) }
     context '正常系' do
       it 'Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
@@ -62,7 +62,7 @@ RSpec.describe 'Task', type: :system do
   end
 
   describe 'Task編集' do
-    let(:task) { FactoryBot.create(:task, project_id: project.id) }
+    let(:task) { create(:task, project_id: project.id) }
     context '正常系' do
       it 'Taskを編集した場合、一覧画面で編集後の内容が表示されること' do
         # FIXME: テストが失敗するので修正してください
@@ -86,7 +86,7 @@ RSpec.describe 'Task', type: :system do
 
       it '既にステータスが完了のタスクのステータスを変更した場合、Taskの完了日が更新されないこと' do
         # TODO: FactoryBotのtraitを利用してください
-        task = FactoryBot.create(:task, :done, project_id: project.id)
+        task = create(:task, :done, project_id: project.id)
         visit edit_project_task_path(project, task)
         select 'todo', from: 'Status'
         click_button 'Update Task'
@@ -98,7 +98,7 @@ RSpec.describe 'Task', type: :system do
   end
 
   describe 'Task削除' do
-    let!(:task) { FactoryBot.create(:task, project_id: project.id) }
+    let!(:task) { create(:task, project_id: project.id) }
     context '正常系' do
       # FIXME: テストが失敗するので修正してください
       it 'Taskが削除されること' do
